@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+       <report
+                id="a3_report_project_issue"
+                model="project.issue"
+                report_type="qweb-pdf"
+                string="Incidencia"
+                name="custom_report_3a.a3_report_project_issue_a3"
+                file="custom_report_3a.a3_report_project_issue_a3"
+
+            />
+
+        <template id="a3_report_project_issue_a3">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="row text-center">
+                        <div class="col-sm-4">
+
+                        </div>
+                        <div class="col-sm-4">
+                            <h2><span t-field="o.project_id"/></h2>
+                        </div>
+                        <div class="col-sm-4">
+
+                        </div>
+                        <strong>Incidencia</strong><br/><span t-field="o.name"/>
+                    </div>
+
+                    <br/><br/><br/><br/>
+                    <div class="row">
+                    <table class="table">
+                        <tr>
+                            <th><strong>Asignada a</strong></th>
+                            <th><strong>Dias a asignar</strong></th>
+                            <th><strong>Dias para el cierre</strong></th>
+                            <th><strong>Prioridad</strong></th>
+                        </tr>
+                        <tr>
+                            <td><span t-field="o.user_id"/></td>
+                            <td><span t-field="o.day_open"/></td>
+                            <td><span t-field="o.day_close"/></td>
+                            <td><span t-field="o.priority"/></td>
+                        </tr>
+                    </table>
+                    </div>
+                    <div class="row">
+                     <table class="table">
+                        <tr>
+                            <th><strong>Cliente</strong></th>
+                            <th><strong>Estado</strong></th>
+                            <th><strong>Tarea</strong></th>
+                        </tr>
+                        <tr>
+                            <td><span t-field="o.partner_id"/></td>
+                            <td><span t-field="o.stage_id"/></td>
+                            <td><span t-field="o.task_id"/></td>
+                        </tr>
+                    </table>
+                        </div>
+
+                    <div class="row">
+                        <strong>Descripcion</strong>
+                        <p t-field="o.description"/>
+                    </div>
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+    </data>
+</openerp>

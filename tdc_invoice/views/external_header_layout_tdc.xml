@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="tdc_footer_layout">
+            <div class="footer">
+                <table>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+</template>
+
+
+    </data>
+</odoo>
+

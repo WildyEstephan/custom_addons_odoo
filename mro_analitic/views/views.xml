@@ -1,0 +1,104 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="mro_analitic.list">
+      <field name="name">mro_analitic list</field>
+      <field name="model">mro_analitic.mro_analitic</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="mro_analitic.action_window">
+      <field name="name">mro_analitic window</field>
+      <field name="res_model">mro_analitic.mro_analitic</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="mro_analitic.action_server">
+      <field name="name">mro_analitic server</field>
+      <field name="model_id" ref="model_mro_analitic_mro_analitic"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="mro_analitic" id="mro_analitic.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="mro_analitic.menu_1" parent="mro_analitic.menu_root"/>
+    <menuitem name="Menu 2" id="mro_analitic.menu_2" parent="mro_analitic.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="mro_analitic.menu_1_list" parent="mro_analitic.menu_1"
+              action="mro_analitic.action_window"/>
+    <menuitem name="Server to list" id="mro_analitic" parent="mro_analitic.menu_2"
+              action="mro_analitic.action_server"/>
+    -->
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="analytic_account_assets_form_inherit" model="ir.ui.view">
+        <field name="name">Analytic Account Assets Form Inherit</field>
+        <field name="model">asset.asset</field>
+        <field name="inherit_id" ref="asset.assets_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='property_stock_asset']" position="after">
+                <!-- Add your fields or attributes here -->
+              <field name="account_analytic_id"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="account_analytic_mro_request_form_inherit" model="ir.ui.view">
+        <field name="name">Account Analytic MRO Request Form Inherit</field>
+        <field name="model">mro.request</field>
+        <field name="inherit_id" ref="mro.mro_request_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='asset_id']" position="after">
+                <!-- Add your fields or attributes here -->
+              <field name="account_analytic_id"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="account_analytic_mro_order_form_inherit" model="ir.ui.view">
+        <field name="name">Account Analytic MRO Order Form Inherit</field>
+        <field name="model">mro.order</field>
+        <field name="inherit_id" ref="mro.mro_order_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='asset_id']" position="after">
+                <!-- Add your fields or attributes here -->
+              <field name="account_analytic_id"/>
+            </xpath>
+
+        </field>
+    </record>
+  </data>
+</odoo>

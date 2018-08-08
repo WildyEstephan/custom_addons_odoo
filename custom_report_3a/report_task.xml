@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+       <report
+                id="a3_report_project_task"
+                model="project.task"
+                report_type="qweb-pdf"
+                string="Tarea"
+                name="custom_report_3a.a3_report_project_task_a3"
+                file="custom_report_3a.a3_report_project_task_a3"
+
+            />
+
+        <template id="a3_report_project_task_a3">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="row text-center" style="font-size:20px;">
+                        <div class="col-sm-4">
+
+                        </div>
+                        <div class="col-sm-4">
+                            <h2><span t-field="o.project_id" style="font-size:30px;"/></h2>
+                        </div>
+                        <div class="col-sm-4">
+
+                        </div>
+                        <strong style="font-size:25px;">Tarea</strong><br/><span style="font-size:25px;" t-field="o.name"/>
+                    </div>
+
+                    <br/><br/><br/><br/>
+                    <div class="row" style="font-size:20px;">
+                    <table class="table">
+                        <tr>
+                            <th><strong>Asignada a</strong></th>
+                            <th><strong>Supervisor</strong></th>
+                            <th><strong>Fecha limite</strong></th>
+                            <th><strong>Prioridad</strong></th>
+                        </tr>
+                        <tr>
+                            <td><span t-field="o.user_id"/></td>
+                            <td><span t-field="o.reviewer_id"/></td>
+                            <td><span t-field="o.date_deadline"/></td>
+                            <td><span t-field="o.priority"/></td>
+                        </tr>
+                    </table>
+                    </div>
+                    <div class="row" style="font-size:20px;">
+                     <table class="table">
+                        <tr>
+                            <th><strong>Cliente</strong></th>
+                            <th><strong>Estado</strong></th>
+                            <th><strong>Ultima actualización</strong></th>
+                        </tr>
+                        <tr>
+                            <td><span t-field="o.partner_id"/></td>
+                            <td><span t-field="o.stage_id"/></td>
+                            <td><span t-field="o.date_last_stage_update"/></td>
+                        </tr>
+                    </table>
+                        </div>
+
+                    <div class="row" style="font-size:20px;">
+                        <strong>Descripcion</strong>
+                        <p t-field="o.description"/>
+                    </div>
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+    </data>
+</openerp>

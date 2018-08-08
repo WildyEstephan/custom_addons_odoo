@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_automed_mro_automed_mro,automed_mro.automed_mro,model_automed_mro_automed_mro,,1,0,0,0

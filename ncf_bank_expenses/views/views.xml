@@ -1,0 +1,163 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="ncf_bank_expenses.list">
+      <field name="name">ncf_bank_expenses list</field>
+      <field name="model">ncf_bank_expenses.ncf_bank_expenses</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="ncf_bank_expenses.action_window">
+      <field name="name">ncf_bank_expenses window</field>
+      <field name="res_model">ncf_bank_expenses.ncf_bank_expenses</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="ncf_bank_expenses.action_server">
+      <field name="name">ncf_bank_expenses server</field>
+      <field name="model_id" ref="model_ncf_bank_expenses_ncf_bank_expenses"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="ncf_bank_expenses" id="ncf_bank_expenses.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="ncf_bank_expenses.menu_1" parent="ncf_bank_expenses.menu_root"/>
+    <menuitem name="Menu 2" id="ncf_bank_expenses.menu_2" parent="ncf_bank_expenses.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="ncf_bank_expenses.menu_1_list" parent="ncf_bank_expenses.menu_1"
+              action="ncf_bank_expenses.action_window"/>
+    <menuitem name="Server to list" id="ncf_bank_expenses" parent="ncf_bank_expenses.menu_2"
+              action="ncf_bank_expenses.action_server"/>
+    -->
+
+    <record id="ncf_bank_report_form" model="ir.ui.view">
+        <field name="name">NCF Bank Report Form</field>
+        <field name="model">ncf_bank.report</field>
+        <field name="arch" type="xml">
+            <form string="Gastos Bancarios">
+              <header>
+                  <button name="confirm_button" string="Confirmar" class="oe_highlight" states="draft" type="object"/>
+                  <button name="create_invoice" string="Crear facturas" class="oe_highlight" states="done" type="object"/>
+                  <field name="state" widget="statusbar" statusbar_visible="draft,done,invoiced"/>
+              </header>
+                <sheet>
+                  <h2><field name="name" attrs="{'readonly': 1}"/></h2>
+                    <group>
+                      <group name="left_group">
+                        <field name="account_journal_id" domain="[('type', '=','purchase' ), ]" attrs="{'readonly': [('state', 'in', ('done'))]}"/>
+                        <field name="partner_id" domain="[('supplier', '=', True), ]" attrs="{'readonly': [('state', 'in', ('done'))]}"/>
+                      </group>
+                      <group name="right_group">
+                        <field name="date" attrs="{'readonly': [('state', 'in', ('done'))]}"/>
+                      </group>
+                      <field name="line_bank_ids" mode="tree,kanban" attrs="{'readonly': [('state', 'in', ('done'))]}">
+                        <tree string="Lineas" editable="top">
+                        <field name="name" string="NCF" class="col-sm-5"/>
+                        <field name="account_id" string="Cuenta de gasto" class="col-sm-2"/>
+                        <field name="amount" string="Monto" class="col-sm-1"/>
+                        <field name="description" string="Descripcion" class="col-sm-3"/>
+                        <field name="date" string="Fecha" class="col-sm-1"/>
+                        <field name="bank_report_id" invisible="1"/>
+                        </tree>
+                      </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ncf_bank_report_tree" model="ir.ui.view">
+        <field name="name">NCF Bank Report Form</field>
+        <field name="model">ncf_bank.report</field>
+        <field name="arch" type="xml">
+            <tree string="Gastos bancarios">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ncf_bank_report_action" model="ir.actions.act_window">
+        <field name="name">Gastos bancarios</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ncf_bank.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+
+          </p>
+        </field>
+    </record>
+
+    <record id="ncf_bank_report_line_tree" model="ir.ui.view">
+        <field name="name">NCf Bank Report Line Tree</field>
+        <field name="model">ncf_bank.report.line</field>
+        <field name="arch" type="xml">
+            <tree string="Lineas">
+              <field name="name" string="NCF"/>
+              <field name="account_id" string="Cuenta de gasto"/>
+              <field name="amount" string="Monto"/>
+              <field name="description" string="Descripcion"/>
+              <field name="date" string="Fecha"/>
+              <field name="bank_report_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ncf_bank_report_line_form" model="ir.ui.view">
+        <field name="name">NCf Bank Report Line Form</field>
+        <field name="model">ncf_bank.report.line</field>
+        <field name="arch" type="xml">
+            <form string="Lineas">
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                          <field name="name"/>
+                          <field name="account_id" string="Cuenta de gasto"/>
+                        </group>
+                      <group name="group_right">
+                        <field name="amount" string="Monto"/>
+                        <field name="description" string="Descripcion"/>
+                        <field name="date" string="Fecha"/>
+                        <field name="bank_report_id" invisible="1"/>
+                      </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="ncf_bank_report_categ" name="Gastos bancarios" parent="account.menu_finance_payables" action="ncf_bank_report_action" sequence="19"/>
+  </data>
+</odoo>

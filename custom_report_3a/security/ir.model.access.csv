@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_report_3a_custom_report_3a,custom_report_3a.custom_report_3a,model_custom_report_3a_custom_report_3a,,1,0,0,0

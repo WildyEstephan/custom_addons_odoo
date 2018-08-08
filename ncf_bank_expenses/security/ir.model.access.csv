@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ncf_bank_expenses_invoice,ncf_bank_expenses.ncf_bank_expenses,model_ncf_bank_report,account.group_account_invoice,1,1,1,0
+access_ncf_bank_expenses_manager,ncf_bank_expenses.ncf_bank_expenses,model_ncf_bank_report,account.group_account_manager,1,1,1,1
+access_ncf_bank_expenses_line_invoice,ncf_bank_expenses.ncf_bank_expenses.line,model_ncf_bank_report_line,account.group_account_invoice,1,1,1,0
+access_ncf_bank_expenses_line_manager,ncf_bank_expenses.ncf_bank_expenses.line,model_ncf_bank_report_line,account.group_account_manager,1,1,1,1

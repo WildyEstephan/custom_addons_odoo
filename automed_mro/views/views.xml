@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+    <!-- Inherit Form View to Modify it -->
+    <record id="inherit_form_view_meter" model="ir.ui.view">
+        <field name="name">Inherit Form View Meter</field>
+        <field name="model">mro.order</field>
+        <field name="inherit_id" ref="mro.mro_order_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//group" position="inside">
+                <!-- Add your fields or attributes here -->
+              <group name="group_left">
+              <table>
+                <tr>
+                  <th>Parametro</th>
+                  <th>Medida</th>
+                  <th>Tipo de lectura</th>
+                </tr>
+                <tr>
+                  <td><field name="parameter_id"/></td>
+                  <td><field name="meter"/></td>
+                  <td><field name="reading_type"/></td>
+                </tr>
+              </table>
+                <button name="button_meter" type="object" string="Guardar Medida"/>
+              </group>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

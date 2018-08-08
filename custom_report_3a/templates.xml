@@ -1,0 +1,128 @@
+<openerp>
+    <data><!-- QWeb Reports -->
+    <!-- NAME & FILE_NAME should be the same -->
+            <report
+                id="a3_report_project"
+                model="project.project"
+                report_type="qweb-pdf"
+                string="Projecto"
+                name="custom_report_3a.a3_report_project_a3"
+                file="custom_report_3a.a3_report_project_a3"
+
+            />
+
+        <template id="a3_report_project_a3">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="row text-center">
+                        <div class="col-sm-4">
+
+                        </div>
+                        <div class="col-sm-4">
+                            <h2><span t-field="o.name"/></h2>
+                        </div>
+                        <div class="col-sm-4">
+
+                        </div>
+                    </div>
+
+                    <br/><br/><br/><br/>
+
+                    <div class="row">
+
+                    <h4>Detalles</h4>
+                        <table class="table">
+                            <tr>
+                                <th><strong>Responsable:</strong></th>
+                                <th t-if="o.partner_id"><strong>Cliente:</strong></th>
+                                <th><strong>Fecha inicio:</strong></th>
+                                <th t-if="o.date"><strong>Fecha Final:</strong></th>
+                            </tr>
+                            <tr>
+                                <td><p t-field="o.user_id"/></td>
+                                <td t-if="o.partner_id"><p t-field="o.partner_id"/></td>
+                                <td><p t-field="o.date_start"/></td>
+                                <td t-if="o.date"><p t-field="o.date"/></td>
+                            </tr>
+                        </table>
+                        <br/><br/>
+                        <table class="table">
+                            <tr>
+                                <th t-if="o.project_escalation_id"><strong>Projecto escalado:</strong></th>
+                                <th><strong>Estado:</strong></th>
+                            </tr>
+                            <tr>
+                                <td t-if="o.project_escalation_id"><p t-field="o.project_escalation_id"/></td>
+                                <td><p t-field="o.state"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+
+                        <h4>Equipo</h4>
+
+                        <ul t-foreach="o.members" t-as="m">
+                            <li><span t-field="m.name"/></li>
+                        </ul>
+                    </div>
+
+                    <div class="row">
+
+                    <h4>Tareas</h4>
+                        <table class="table">
+                            <tr>
+                                <th><strong>Nombre:</strong></th>
+                                <th><strong>Asignado a:</strong></th>
+                                <th><strong>Fecha limite:</strong></th>
+                                <th><strong>Prioridad:</strong></th>
+                                <th><strong>Supervisor:</strong></th>
+                            </tr>
+                            <t t-foreach="o.task_ids" t-as="t">
+                            <tr>
+                                <td><p t-field="t.name"/></td>
+                                <td><p t-field="t.user_id"/></td>
+                                <td><p t-field="t.date_deadline"/></td>
+                                <td><p t-field="t.priority"/></td>
+                                <td><p t-field="t.reviewer_id"/></td>
+                            </tr>
+                            </t>
+                        </table>
+                        <br/><br/>
+                    </div>
+
+                    <div class="row">
+
+                    <h4>Incidencias</h4>
+                        <table class="table">
+                            <tr>
+                                <th><strong>Nombre:</strong></th>
+                                <th><strong>Asignado a:</strong></th>
+                                <th><strong>Prioridad:</strong></th>
+                                <th><strong>Dias a asignar:</strong></th>
+                                <th><strong>Dias para el cierre:</strong></th>
+                            </tr>
+                            <t t-foreach="o.issue_ids" t-as="i">
+                            <tr>
+                                <td><p t-field="i.name"/></td>
+                                <td><p t-field="i.user_id"/></td>
+                                <td><p t-field="i.priority"/></td>
+                                <td><p t-field="i.day_open"/></td>
+                                <td><p t-field="i.day_close"/></td>
+                            </tr>
+                            </t>
+                        </table>
+                        <br/><br/>
+                    </div>
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+
+    </data>
+</openerp>
